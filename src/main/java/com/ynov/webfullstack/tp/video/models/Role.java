@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue
@@ -18,7 +17,7 @@ public class Role {
     private String description;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private List<Utilisateur> utilisateurs;
 
     public Role() {
     }
@@ -48,7 +47,7 @@ public class Role {
         return description;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public List<Utilisateur> getUsers() {
+        return utilisateurs;
     }
 }

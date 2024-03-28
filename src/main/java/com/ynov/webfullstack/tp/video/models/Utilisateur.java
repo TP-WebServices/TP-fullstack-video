@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-public class User {
+public class Utilisateur {
     @Id
     @GeneratedValue()
     private UUID id;
@@ -18,15 +18,15 @@ public class User {
     private String password;
     @ManyToMany
     @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            name = "utilisateur_role",
+            joinColumns = @JoinColumn(name = "utlisateur_id"),
+            inverseJoinColumns = @JoinColumn(name = "utilisateur_id"))
     private List<Role> roles;
 
-    public User() {
+    public Utilisateur() {
     }
 
-    public User(Role role) {
+    public Utilisateur(Role role) {
         this.addRole(role);
     }
 
