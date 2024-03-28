@@ -23,8 +23,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    public User() {
-//        this.roles.add(new Role());
+    public User(Role role) {
+        this.addRole(role);
     }
 
     public UUID getId() {
@@ -33,5 +33,9 @@ public class User {
 
     public List<Role> getRoles() {
         return roles;
+    }
+
+    public void addRole(Role role) {
+        this.roles.add(role);
     }
 }
