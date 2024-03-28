@@ -25,4 +25,32 @@ public class Tag {
         this.uuid = UUID.randomUUID();
         this.title = title;
     }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
+
+    public void addVideo(Video video) {
+        this.videos.add(video);
+    }
 }
