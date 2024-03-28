@@ -13,4 +13,6 @@ public interface UtilisateurRepository extends CrudRepository<Utilisateur, UUID>
 
     @Query("SELECT u FROM Utilisateur u JOIN u.roles r WHERE r.title = :title")
     List<Utilisateur> findUtilisateursByRoleTitle(String title);
+
+    List<Utilisateur> findByUsernameContains(String username);
 }

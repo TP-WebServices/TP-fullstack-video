@@ -56,6 +56,11 @@ public class UtilisateurController {
         return utilisateurRepository.findUtilisateursByRoleTitle(title);
     }
 
+    @GetMapping("/similar/{username}")
+    public Iterable<Utilisateur> getUtilisateursByUsername(@PathVariable String username) {
+        return utilisateurRepository.findByUsernameContains(username);
+    }
+
     @PutMapping("/{uuid}/role/{title}")
     public ResponseEntity addRoleToUtilisateur(@PathVariable UUID uuid, @PathVariable String title) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(uuid);
