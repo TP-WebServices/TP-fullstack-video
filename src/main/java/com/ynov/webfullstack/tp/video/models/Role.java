@@ -8,7 +8,7 @@ import java.util.UUID;
 public class Role {
     @Id
     @GeneratedValue
-    private UUID id;
+    private UUID uuid;
 
     @Column(unique = true, nullable = false)
     private String title;
@@ -23,7 +23,7 @@ public class Role {
     }
 
     public Role(UUID id, String title, String description) {
-        this.id = id;
+        this.uuid = id;
         this.title  = title;
         this.description = description;
 
@@ -31,12 +31,26 @@ public class Role {
     }
 
     public Role(String title, String description) {
+        this.uuid = UUID.randomUUID();
         this.title = title;
         this.description = description;
     }
 
-    public UUID getId() {
-        return id;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public String getTitle() {
