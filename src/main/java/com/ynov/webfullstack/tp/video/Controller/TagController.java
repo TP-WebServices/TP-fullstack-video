@@ -1,6 +1,7 @@
 package com.ynov.webfullstack.tp.video.Controller;
 
 import com.ynov.webfullstack.tp.video.models.Tag;
+import com.ynov.webfullstack.tp.video.models.Video;
 import com.ynov.webfullstack.tp.video.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,18 @@ public class TagController {
         Optional<Tag> tag = tagRepository.findById(uuid);
         return tag.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Tag> getTagByTitle(@PathVariable String title) {
+        Optional<Tag> tag = tagRepository.findByTitle(title);
+        return tag.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/title/similar/{title}")
+    public List<Tag> getTagByTitleSimilar(@PathVariable String title) {
+        return tagRepository.findTagsByTitleContaining(title);
+    }
+
 
     @PutMapping("/{uuid}")
     public ResponseEntity<Tag> updateTag(@PathVariable UUID uuid, @RequestBody Tag tagDetails) {
