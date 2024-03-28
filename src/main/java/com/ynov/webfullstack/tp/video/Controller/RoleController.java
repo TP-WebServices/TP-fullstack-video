@@ -1,6 +1,7 @@
 package com.ynov.webfullstack.tp.video.Controller;
 
 import com.ynov.webfullstack.tp.video.models.Role;
+import com.ynov.webfullstack.tp.video.models.Utilisateur;
 import com.ynov.webfullstack.tp.video.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,11 @@ public class RoleController {
         return roleRepository.findAll();
     }
 
+    @GetMapping("/title/{title}")
+    public ResponseEntity<Role> getUtilisateurByTitle(@PathVariable String title) {
+        Optional<Role> role = roleRepository.findByTitle(title);
+        return role.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
     @GetMapping("/{uuid}")
     public ResponseEntity<Role> getRole(@PathVariable UUID uuid) {
         Optional<Role> role = roleRepository.findById(uuid);
@@ -39,6 +45,7 @@ public class RoleController {
         if (role.isPresent()) {
             Role updatedRole = role.get();
             updatedRole.setTitle(roleDetails.getTitle());
+            updatedRole.setDescription(roleDetails.getDescription());
             roleRepository.save(updatedRole);
             return ResponseEntity.ok(updatedRole);
         } else {
@@ -47,7 +54,7 @@ public class RoleController {
     }
 
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<Void> deleteTag(@PathVariable UUID uuid) {
+    public ResponseEntity<Void> deleteRole(@PathVariable UUID uuid) {
         Optional<Role> role = roleRepository.findById(uuid);
         if (role.isPresent()) {
             roleRepository.delete(role.get());

@@ -1,5 +1,7 @@
 package com.ynov.webfullstack.tp.video.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -15,7 +17,10 @@ public class Utilisateur {
     @Column(unique = true)
     private String username;
     @NotBlank
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "utilisateur_role",
@@ -24,10 +29,6 @@ public class Utilisateur {
     private List<Role> roles;
 
     public Utilisateur() {
-    }
-
-    public Utilisateur(Role role) {
-        this.addRole(role);
     }
 
 

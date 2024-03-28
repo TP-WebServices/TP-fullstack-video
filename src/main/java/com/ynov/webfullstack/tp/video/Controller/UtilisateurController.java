@@ -1,6 +1,7 @@
 package com.ynov.webfullstack.tp.video.Controller;
 
 import com.ynov.webfullstack.tp.video.models.Utilisateur;
+import com.ynov.webfullstack.tp.video.repository.RoleRepository;
 import com.ynov.webfullstack.tp.video.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,14 @@ import java.util.UUID;
 public class UtilisateurController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
     @PostMapping
-    public Utilisateur addUtilisateur(@RequestBody Utilisateur utilisateur) {return utilisateurRepository.save(utilisateur);}
+    public Utilisateur addUtilisateur(@RequestBody Utilisateur utilisateur) {
+        utilisateur.addRole(roleRepository.findByTitle("visiteur").get());
+        return utilisateurRepository.save(utilisateur);
+    }
     @GetMapping
     public Iterable<Utilisateur> getUtilisateurs() {return utilisateurRepository.findAll();}
     @GetMapping("/{uuid}")
@@ -24,6 +31,7 @@ public class UtilisateurController {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(uuid);
         return utilisateur.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PutMapping("/{uuid}")
     public ResponseEntity updateUtilisateur(@PathVariable UUID uuid, @RequestBody Utilisateur utilisateurDetails) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findById(uuid);
