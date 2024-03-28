@@ -1,8 +1,6 @@
 package com.ynov.webfullstack.tp.video.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +16,10 @@ public class Video {
     private String shortDescription;
     private String longDescription;
     @ManyToMany
+    @JoinTable(
+            name = "video_tag",
+            joinColumns = @JoinColumn(name = "video_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tags;
 
     public Video() {}
