@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Entity
 public class Video {
-    @Id
+    @Id @GeneratedValue
     private UUID uuid;
     @NotNull
     private String title;
