@@ -15,8 +15,6 @@ public class Tag {
     private UUID uuid;
     @NotNull
     private String title;
-    @ManyToMany(mappedBy = "tags")
-    private List<Video> videos;
 
     public Tag() {
     }
@@ -42,15 +40,4 @@ public class Tag {
         this.title = title;
     }
 
-    public List<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
-    }
-
-    public void addVideo(Video video) {
-        this.videos.add(video);
-    }
 }
