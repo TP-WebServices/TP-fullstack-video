@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +30,7 @@ public class Utilisateur {
     private List<Role> roles;
 
     public Utilisateur() {
+        roles = new ArrayList<>();
     }
 
 
